@@ -569,6 +569,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     boolean mVolBtnMusicControls;
     boolean mVolBtnLongPress;
 
+    boolean mVolumeAnswerCall;
+
     private boolean mPendingKeyguardOccluded;
     private boolean mKeyguardOccludedChanged;
 
@@ -864,6 +866,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.VOLBTN_MUSIC_CONTROLS), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.VOLUME_ANSWER_CALL), false, this,
                     UserHandle.USER_ALL);
             updateSettings();
         }
@@ -2705,6 +2710,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     public void updateSettings() {
         ContentResolver resolver = mContext.getContentResolver();
         boolean updateRotation = false;
+        int mDeviceHardwareWakeKeys = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareWakeKeys);
         synchronized (mLock) {
             mEndcallBehavior = Settings.System.getIntForUser(resolver,
                     Settings.System.END_BUTTON_BEHAVIOR,
@@ -2740,6 +2747,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             // volume rocker wake
             mVolumeRockerWake = Settings.System.getIntForUser(resolver,
                     Settings.System.VOLUME_ROCKER_WAKE, 0, UserHandle.USER_CURRENT) != 0;
+            mVolumeAnswerCall = (Settings.System.getIntForUser(resolver,
+                    Settings.System.VOLUME_ANSWER_CALL, 0, UserHandle.USER_CURRENT) == 1)
+                    && ((mDeviceHardwareWakeKeys) != 0);
 
             // Configure wake gesture.
             boolean wakeGestureEnabledSetting = Settings.Secure.getIntForUser(resolver,
@@ -4340,6 +4350,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         // When {@link #mHandleVolumeKeysInWM} is set, volume key events
                         // should be dispatched to WM.
                         if (telecomManager.isRinging()) {
+                            if (mVolumeAnswerCall) {
+                                telecomManager.acceptRingingCall();
+                            }
+
                             // If an incoming call is ringing, either VOLUME key means
                             // "silence ringer".  We handle these keys here, rather than
                             // in the InCallScreen, to make sure we'll respond to them
