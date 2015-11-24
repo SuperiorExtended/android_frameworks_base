@@ -73,6 +73,9 @@ interface IBatteryStats {
     @UnsupportedAppUsage(maxTargetSdk = 30, trackingBug = 170729553)
     @RequiresNoPermission
     boolean isCharging();
+    
+    @EnforcePermission("RESET_BATTERY_STATS")
+    void resetStatistics();
 
     // Return the computed amount of time remaining on battery, in milliseconds.
     // Returns -1 if nothing could be computed.
