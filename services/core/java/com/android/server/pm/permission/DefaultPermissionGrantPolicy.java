@@ -1001,6 +1001,11 @@ final class DefaultPermissionGrantPolicy {
                 getDefaultProviderAuthorityPackage("com.android.providers.contacts.ContactsProvider2", userId), userId,
                 CONTACTS_PERMISSIONS, STORAGE_PERMISSIONS);
 
+        // ContactsProvider2
+        grantSystemFixedPermissionsToSystemPackage(pm,
+                getDefaultProviderAuthorityPackage("com.android.providers.contacts.ContactsProvider2", userId), userId,
+                CONTACTS_PERMISSIONS, STORAGE_PERMISSIONS);
+
         // DownloadProviders
         grantSystemFixedPermissionsToSystemPackage(pm, "com.android.providers.downloads.DownloadProvider", userId,
                 STORAGE_PERMISSIONS);
@@ -1081,6 +1086,10 @@ final class DefaultPermissionGrantPolicy {
         grantPermissionsToSystemPackage(pm, "com.google.android.as", userId, STORAGE_PERMISSIONS,
                 CAMERA_PERMISSIONS, CONTACTS_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS, MICROPHONE_PERMISSIONS,
                 NEARBY_DEVICES_PERMISSIONS, PHONE_PERMISSIONS, SMS_PERMISSIONS);
+
+        // Project Fi
+        grantSystemFixedPermissionsToSystemPackage(pm, "com.google.android.apps.tycho", userId, CONTACTS_PERMISSIONS,
+                PHONE_PERMISSIONS, MICROPHONE_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS, SMS_PERMISSIONS);
 
         // Google Backup Transport
         grantSystemFixedPermissionsToSystemPackage(pm, "com.google.android.backuptransport", userId,
