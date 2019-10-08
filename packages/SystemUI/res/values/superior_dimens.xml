@@ -94,4 +94,8 @@
     <!-- Additional gesture navbar lengths -->
     <dimen name="navigation_home_handle_width_short">72dp</dimen>
     <dimen name="navigation_home_handle_width_long">140dp</dimen>
+    
+    <!-- OmniStyle custom headers -->
+    <dimen name="qs_header_image_height">142dp</dimen>
+    <dimen name="qs_header_image_fade_size">80dp</dimen>
 </resources>

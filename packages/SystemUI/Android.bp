@@ -201,6 +201,7 @@ android_library {
         "LowLightDreamLib",
         "motion_tool_lib",
         "guava",
+        "FadingEdgeLayoutLib"
     ],
     manifest: "AndroidManifest.xml",
 
