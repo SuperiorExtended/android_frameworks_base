@@ -1321,13 +1321,19 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
                 updateRowsH(mDefaultRow, true);
                 mExpandRows.setExpanded(mExpanded);
             });
-            mSettingsIcon.setOnLongClickListener(new View.OnLongClickListener() {
+            mExpandRows.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Intent intent = new Intent().setComponent(SOUND_SETTING_COMPONENT);
-                    mMediaOutputDialogFactory.dismiss();
+                    Events.writeEvent(Events.EVENT_SETTINGS_CLICK);
                     dismissH(DISMISS_REASON_SETTINGS_CLICKED);
-                    mActivityStarter.startActivity(intent, true /* dismissShade */);
+                    mMediaOutputDialogFactory.dismiss();
+                    if (FeatureFlagUtils.isEnabled(mContext,
+                            FeatureFlagUtils.SETTINGS_VOLUME_PANEL_IN_SYSTEMUI)) {
+                        mVolumePanelFactory.create(true /* aboveStatusBar */, null);
+                    } else {
+                        mActivityStarter.startActivity(new Intent(Settings.Panel.ACTION_VOLUME),
+                                true /* dismissShade */);
+                    }
                     return true;
                 }
             });
