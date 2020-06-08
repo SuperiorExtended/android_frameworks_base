@@ -188,6 +188,7 @@ import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.hardware.SystemSensorManager;
 import android.hardware.power.Mode;
 import android.net.Uri;
 import android.os.Binder;
@@ -789,6 +790,7 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
     private int mDeviceOwnerUid = Process.INVALID_UID;
 
     private Set<Integer> mProfileOwnerUids = new ArraySet<Integer>();
+    private SystemSensorManager mSystemSensorManager;
 
     private final class SettingObserver extends ContentObserver {
         private final Uri mFontScaleUri = Settings.System.getUriFor(FONT_SCALE);
@@ -887,6 +889,9 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
 
     public void installSystemProviders() {
         mSettingsObserver = new SettingObserver();
+
+        // Block sensor usage per app
+        mSystemSensorManager = new SystemSensorManager(mContext, mContext.getMainLooper());
     }
 
     public void retrieveSettings(ContentResolver resolver) {
@@ -6153,6 +6158,9 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
                 mAppWarnings.onPackageUninstalled(name);
                 mCompatModePackages.handlePackageUninstalledLocked(name);
                 mPackageConfigPersister.onPackageUninstall(name, userId);
+                if (mSystemSensorManager != null) {
+                   mSystemSensorManager.notePackageUninstalled(name);
+                }
             }
         }
 
