@@ -1630,6 +1630,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(NotificationPanelViewController.CANCEL_NOTIFICATION_PULSE_ACTION);
         mBroadcastDispatcher.registerReceiver(mBroadcastReceiver, filter, null, UserHandle.ALL);
         mGameSpaceManager.observe();
     }
@@ -2397,6 +2398,9 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
                 }
                 finishBarAnimations();
                 resetUserExpandedStates();
+            }
+            else if (NotificationPanelViewController.CANCEL_NOTIFICATION_PULSE_ACTION.equals(action)) {
+                mShadeSurface.stopNotificationPulse();
             }
             Trace.endSection();
         }
