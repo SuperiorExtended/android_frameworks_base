@@ -7093,6 +7093,12 @@ public final class Settings {
          * @hide
          */
         public static final String NOTIFICATION_MATERIAL_DISMISS = "notification_material_dismiss";
+        
+        /**
+         * Whether to disable qs on secure lockscreen.
+         * @hide
+         */
+        public static final String SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
 
         /**
          * @hide
