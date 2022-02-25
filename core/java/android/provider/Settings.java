@@ -5902,6 +5902,12 @@ public final class Settings {
          */
         public static final String NAVBAR_STYLE = "navbar_style";
 
+        /**      
+         * Whether to show data usage in qs footer
+         * @hide
+         */
+        public static final String QS_FOOTER_DATA_USAGE = "qs_footer_data_usage";
+
         /**
          * Display style of AM/PM next to clock in status bar
          * 0: Normal display (Eclair stock)
