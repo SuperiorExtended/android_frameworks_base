@@ -69,6 +69,7 @@ import java.util.concurrent.TimeoutException;
 
 import com.android.internal.util.superior.PixelPropsUtils;
 import com.android.internal.util.superior.MeizuPropsUtils;
+import com.android.internal.util.superior.GamesPropsUtils;
 
 /**
  * Base class for implementing application instrumentation code.  When running
@@ -1287,6 +1288,7 @@ public class Instrumentation {
         String packageName = context.getPackageName();
         PixelPropsUtils.setProps(packageName);
         MeizuPropsUtils.setProps(app);
+        GamesPropsUtils.setProps(app);
         return app;
     }
     
@@ -1307,6 +1309,7 @@ public class Instrumentation {
         String packageName = context.getPackageName();
         PixelPropsUtils.setProps(packageName);
         MeizuPropsUtils.setProps(app);
+        GamesPropsUtils.setProps(app);
         return app;
     }
 
