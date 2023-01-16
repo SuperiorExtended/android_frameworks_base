@@ -1325,12 +1325,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         mNotificationContainerParent.addView(keyguardStatusView, statusIndex);
 
         // Re-inflate the keyguard status bar.
-        statusIndex = mView.indexOfChild(mKeyguardStatusBar);
         mView.removeView(mKeyguardStatusBar);
         mKeyguardStatusBar = (KeyguardStatusBarView) mLayoutInflater.inflate(
                 R.layout.keyguard_status_bar, mView, false);
-        mView.addView(mKeyguardStatusBar);
         mKeyguardStatusBar.setVisibility(isOnKeyguard() ? View.VISIBLE : View.INVISIBLE);
+        mView.addView(mKeyguardStatusBar, statusIndex);
 
         attachSplitShadeMediaPlayerContainer(
                 keyguardStatusView.findViewById(R.id.status_view_media_container));
