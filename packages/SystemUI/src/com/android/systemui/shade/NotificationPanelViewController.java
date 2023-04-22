@@ -281,6 +281,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
     private static final String DOUBLE_TAP_SLEEP_GESTURE =
             "customsystem:" + Settings.System.DOUBLE_TAP_SLEEP_GESTURE;
+    private static final String QS_UI_STYLE =
+            "system:" + Settings.System.QS_UI_STYLE;
 
     private static final Rect M_DUMMY_DIRTY_RECT = new Rect(0, 0, 1, 1);
     private static final Rect EMPTY_RECT = new Rect();
@@ -624,6 +626,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     private int mLockscreenToOccludedTransitionTranslationY;
 
     private boolean mBlockedGesturalNavigation = false;
+    
+    private boolean mIsA11Style;
 
     private final PowerManagerInternal mLocalPowerManager;
 
@@ -4520,6 +4524,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             mStatusBarStateListener.onStateChanged(mStatusBarStateController.getState());
             mConfigurationController.addCallback(mConfigurationListener);
             mTunerService.addTunable(this, DOUBLE_TAP_SLEEP_GESTURE);
+            mTunerService.addTunable(this, QS_UI_STYLE);
             // Theme might have changed between inflating this view and attaching it to the
             // window, so
             // force a call to onThemeChanged
@@ -4542,8 +4547,16 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
         @Override
         public void onTuningChanged(String key, String newValue) {
-            if (DOUBLE_TAP_SLEEP_GESTURE.equals(key)) {
-                mDoubleTapToSleepEnabled = TunerService.parseIntegerSwitch(newValue, true);
+            switch (key) {
+                case DOUBLE_TAP_SLEEP_GESTURE:
+		    mDoubleTapToSleepEnabled =
+                    TunerService.parseIntegerSwitch(newValue, false);
+                    break;
+                case QS_UI_STYLE:
+                    mIsA11Style = TunerService.parseInteger(newValue, 0) == 1;
+                    break;
+                default:
+                    break;
             }
         }
     }
