@@ -249,6 +249,9 @@ import com.android.server.custom.LineageHardwareService;
 // LiveDisplay
 import com.android.server.custom.display.LiveDisplayService;
 
+// LineageHealth
+import com.android.server.custom.health.HealthInterfaceService;
+
 /**
  * Entry point to {@code system_server}.
  */
@@ -2586,6 +2589,11 @@ public final class SystemServer implements Dumpable {
             // LiveDisplay
             t.traceBegin("StartLiveDisplayService");
             mSystemServiceManager.startService(LiveDisplayService.class);
+            t.traceEnd();
+
+            // LineageHealth
+            t.traceBegin("StartHealthService");
+            mSystemServiceManager.startService(HealthInterfaceService.class);
             t.traceEnd();
 
             // LinearMotor
