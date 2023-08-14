@@ -216,6 +216,10 @@ public class ImageHelper {
         return image;
     }
 
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
+        return getRoundedCornerBitmap(bitmap, 24f);
+    }
+
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float roundPx) {
         if (bitmap == null) {
             return null;
