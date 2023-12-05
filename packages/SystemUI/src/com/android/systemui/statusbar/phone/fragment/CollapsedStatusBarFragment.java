@@ -151,6 +151,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private StatusIconContainer mStatusIcons;
     private int mSignalClusterEndPadding = 0;
     private boolean mShowVibrateIcon;
+    
+    private View mStatusBarLogo;
 
     private List<String> mBlockedIcons = new ArrayList<>();
     private Map<Startable, Startable.State> mStartableStates = new ArrayMap<>();
@@ -315,6 +317,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mStatusIcons = mStatusBar.findViewById(R.id.statusIcons);
         mBatteryBar = mStatusBar.findViewById(R.id.battery_bar);
         mOngoingCallChip = mStatusBar.findViewById(R.id.ongoing_call_chip);
+        mStatusBarLogo = mStatusBar.findViewById(R.id.statusbar_logo);
         showEndSideContent(false);
         showClock(false);
         initOperatorName();
@@ -680,10 +683,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void hideNotificationIconArea(boolean animate) {
+        animateHide(mStatusBarLogo, animate);
         animateHide(mNotificationIconAreaInner, animate);
     }
 
     public void showNotificationIconArea(boolean animate) {
+        animateShow(mStatusBarLogo, animate);
         animateShow(mNotificationIconAreaInner, animate);
     }
 
