@@ -453,6 +453,10 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         if (mDevicePostureController != null) {
             mDevicePostureController.addCallback(mDevicePostureControllerCallback);
         }
+
+        mHandler.post(() -> {
+            mControllerCallbackH.onConfigurationChanged();
+        });
     }
 
     @Override
