@@ -6326,18 +6326,6 @@ public final class Settings {
         public static final String AMBIENT_TEXT_TYPE_COLOR = "ambient_text_type_color";
 
         /**
-        * Ambient Customization
-        * @hide
-        */
-        public static final String AMBIENT_IMAGE = "ambient_image";
-
-        /**
-         * Ambient Custom Image
-         * @hide
-         */
-        public static final String AMBIENT_CUSTOM_IMAGE = "ambient_custom_image";
-
-        /**
          * Whether to enable Smart Pixels
          * @hide
          */
@@ -6394,79 +6382,6 @@ public final class Settings {
          * @hide
          */
         public static final String CUSTOM_TRANSITIONS_KEY = "custom_transitions_page_tile";
-        
-        /**
-         * QS Header image
-         * format = "qs_header_image_" + QS_HEADER_IMAGE
-         * values 0 and -1 are reserved to mark disabled state (0) and custom user image (-1)
-         * @hide
-         */
-        public static final String QS_HEADER_IMAGE = "qs_header_image";
-        
-        /**
-         * QS header image tint
-         * 0 - No tint
-         * 1 - Accent
-         * 2 - Color primary
-         * 3 - Color primary inverse
-         * 4 - Custom
-         * @hide
-         */
-        public static final String QS_HEADER_IMAGE_TINT = "qs_header_image_tint";
-
-        /**
-         * QS header image custom tint
-         * @hide
-         **/
-        public static final String QS_HEADER_IMAGE_TINT_CUSTOM = "qs_header_image_tint_custom";
-
-        /**
-         * QS header image alpha
-         * @hide
-         **/
-        public static final String QS_HEADER_IMAGE_ALPHA = "qs_header_image_alpha";
-
-        /**
-         * QS header image portrait height
-         * @hide
-         **/
-        public static final String QS_HEADER_IMAGE_HEIGHT_PORTRAIT = "qs_header_image_height_portrait";
-
-        /**
-         * QS header image landscape height
-         * @hide
-         **/
-        public static final String QS_HEADER_IMAGE_HEIGHT_LANDSCAPE = "qs_header_image_height_landscape";
-
-        /**
-         * Wether to enable QS header image in landscape mode
-         * @hide
-         **/
-        public static final String QS_HEADER_IMAGE_LANDSCAPE_ENABLED = "qs_header_image_landscape_enabled";
-
-        /**
-         * QS header image side padding
-         * @hide
-         **/
-         public static final String QS_HEADER_IMAGE_PADDING_SIDE = "qs_header_image_padding_side";
-
-         /**
-          * QS header image top padding
-          * @hide
-          **/
-        public static final String QS_HEADER_IMAGE_PADDING_TOP = "qs_header_image_padding_top";
-
-        /**
-          * QS header image custom URI
-          * @hide
-          **/
-        public static final String QS_HEADER_IMAGE_URI = "qs_header_image_uri";
-
-        /**
-          * QS header size
-          * @hide
-          */
-        public static final String QS_HEADER_SIZE = "qs_header_size";
         
         /**
          * Whether to show the battery bar
@@ -6849,17 +6764,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO);
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_POSITION);
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_STYLE);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_TINT);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_TINT_CUSTOM);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_ALPHA);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_HEIGHT_PORTRAIT);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_HEIGHT_LANDSCAPE);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_LANDSCAPE_ENABLED);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_PADDING_SIDE);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_PADDING_TOP);
-            PRIVATE_SETTINGS.add(QS_HEADER_IMAGE_URI);
-            PRIVATE_SETTINGS.add(QS_HEADER_SIZE);
             PRIVATE_SETTINGS.add(AMBIENT_TEXT_COLOR);
             PRIVATE_SETTINGS.add(AMBIENT_TEXT_TYPE_COLOR);
             PRIVATE_SETTINGS.add(DISPLAY_TEMPERATURE_DAY);
