@@ -233,7 +233,6 @@ public class KeyguardClockSwitchController extends ViewController<KeyguardClockS
      * Used for status view to pass the screen offset from parent view
      */
     public void setLockscreenClockY(int clockY) {
-        updateCustomClock();
         if (mView.screenOffsetYPadding != clockY) {
             mView.screenOffsetYPadding = clockY;
             mView.updateClockTargetRegions();
@@ -417,7 +416,6 @@ public class KeyguardClockSwitchController extends ViewController<KeyguardClockS
     }
 
     private void addDateWeatherView() {
-        updateCustomClock();
         mDateWeatherView = (ViewGroup) mSmartspaceController.buildAndConnectDateView(mView);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 MATCH_PARENT, WRAP_CONTENT);
@@ -687,7 +685,6 @@ public class KeyguardClockSwitchController extends ViewController<KeyguardClockS
     }
 
     private void setDateWeatherVisibility() {
-        updateCustomClock();
         if (mDateWeatherView != null) {
             mUiExecutor.execute(() -> {
                 if (mEnableCustomClock) {
