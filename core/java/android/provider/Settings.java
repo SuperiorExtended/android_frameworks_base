@@ -6938,12 +6938,6 @@ public final class Settings {
          * @hide
          */
         public static final String CUSTOM_TRANSITIONS_KEY = "custom_transitions_page_tile";
-
-        /**
-          * QS header size
-          * @hide
-          */
-        public static final String QS_HEADER_SIZE = "qs_header_size";
         
         /**
          * @hide
@@ -7375,7 +7369,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(INCREASING_RING);
             PRIVATE_SETTINGS.add(INCREASING_RING_START_VOLUME);
             PRIVATE_SETTINGS.add(INCREASING_RING_RAMP_UP_TIME);
-            PRIVATE_SETTINGS.add(QS_HEADER_SIZE);
             PRIVATE_SETTINGS.add(AMBIENT_TEXT_COLOR);
             PRIVATE_SETTINGS.add(AMBIENT_TEXT_TYPE_COLOR);
             PRIVATE_SETTINGS.add(STATUSBAR_LEFT_PADDING);
