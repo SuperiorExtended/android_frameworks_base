@@ -278,8 +278,6 @@ public class QuickStatusBarHeader extends FrameLayout
         mBluetoothButton.setOnLongClickListener(this);
         
         updateSettings();
-
-        updateResources();
         
         startUpdateInterntTileStateAsync();
         startUpdateBluetoothTileStateAsync();
@@ -571,7 +569,7 @@ public class QuickStatusBarHeader extends FrameLayout
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        updateResources();
+        updateSettings();
     }
 
     @Override
