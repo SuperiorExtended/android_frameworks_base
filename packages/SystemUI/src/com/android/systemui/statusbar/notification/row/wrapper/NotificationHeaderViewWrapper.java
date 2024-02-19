@@ -40,6 +40,7 @@ import com.android.app.animation.Interpolators;
 import com.android.internal.widget.CachingIconView;
 import com.android.internal.widget.NotificationExpandButton;
 import com.android.systemui.R;
+import com.android.systemui.Dependency;
 import com.android.systemui.statusbar.TransformableView;
 import com.android.systemui.statusbar.ViewTransformationHelper;
 import com.android.systemui.statusbar.notification.CustomInterpolatorTransformation;
@@ -50,12 +51,17 @@ import com.android.systemui.statusbar.notification.RoundableState;
 import com.android.systemui.statusbar.notification.TransformState;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 
+import com.android.systemui.tuner.TunerService;
+
 import java.util.Stack;
 
 /**
  * Wraps a notification view which may or may not include a header.
  */
-public class NotificationHeaderViewWrapper extends NotificationViewWrapper implements Roundable {
+public class NotificationHeaderViewWrapper extends NotificationViewWrapper implements Roundable, TunerService.Tunable {
+
+    private static final String QS_COLORED_ICONS =
+            "system:" + "qs_colored_icons";
 
     private final RoundableState mRoundableState;
     private static final Interpolator LOW_PRIORITY_HEADER_CLOSE
@@ -76,6 +82,7 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
     private boolean mTransformLowPriorityTitle;
     private RoundnessChangedListener mRoundnessChangedListener;
     private Context mContext;
+    private boolean mQsColoredIconsEnabled;
 
     protected NotificationHeaderViewWrapper(Context ctx, View view, ExpandableNotificationRow row) {
         super(ctx, view, row);
@@ -116,6 +123,18 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
                 TRANSFORMING_VIEW_TITLE);
         resolveHeaderViews();
         addFeedbackOnClickListener(row);
+        Dependency.get(TunerService.class).addTunable(this, QS_COLORED_ICONS);
+    }
+
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        switch (key) {
+            case QS_COLORED_ICONS:
+                mQsColoredIconsEnabled = TunerService.parseIntegerSwitch(newValue, false);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -199,7 +218,7 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
         String pkgname = row.getEntry().getSbn().getPackageName();
         Drawable appIcon = pkgname != null ?
                     getApplicationIcon(pkgname) : null;
-        if (appIcon != null && mWorkProfileImage != null) {
+        if (appIcon != null && mWorkProfileImage != null && mQsColoredIconsEnabled) {
             mIcon.setImageDrawable(appIcon);
             mWorkProfileImage.setImageIcon(notification.getSmallIcon());
             // The work profile image is always the same lets just set the icon tag for it not to
