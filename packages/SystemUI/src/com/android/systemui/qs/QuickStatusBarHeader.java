@@ -630,8 +630,16 @@ public class QuickStatusBarHeader extends FrameLayout
         TouchAnimator.Builder builderP = new TouchAnimator.Builder()
             .addFloat(mOpQsLayout, "translationY", 0, qqsExpandY);
         mQQSContainerAnimator = builderP.build();
-
-        updateMediaPlayer();
+        
+        // Hide header image in landscape mode
+    	if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    	    mQsHeaderImageView.setVisibility(View.GONE);
+    	} else {
+    	    mQsHeaderImageView.setVisibility(View.VISIBLE);
+    	    updateHeaderImage();
+    	    applyHeaderBackgroundShadow();
+      }
+      updateMediaPlayer();
     }
 
     public void startUpdateInterntTileStateAsync() {
