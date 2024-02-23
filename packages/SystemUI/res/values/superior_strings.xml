@@ -77,7 +77,6 @@
 
     <!-- Status bar tuner -->
     <string name="status_bar_items_title">Statusbar icons</string>
-    <string name="status_bar_call_strength">Call strength</string>
     <string name="status_bar_data_saver">Data saver</string>
     <string name="status_bar_vpn">VPN</string>
 
@@ -85,6 +84,15 @@
     <string name="status_bar_nfc">NFC</string>
     <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
     <string name="accessibility_status_bar_nfc">Nfc</string>
+    
+    <!-- Name of the roaming status bar icon. -->
+    <string name="status_bar_roaming">Roaming indicator</string>
+
+    <!-- Name of the HD calling status bar icon. -->
+    <string name="status_bar_hd_calling">HD calling (VoLTE/VoNR)</string>
+
+    <!-- Name of the VoWiFi status bar icon. -->
+    <string name="status_bar_vowifi">Wi-Fi calling (VoWiFi)</string>
 
     <!-- Advanced Reboot -->
     <string name="global_action_restart_advanced">Advanced</string>
@@ -152,9 +160,6 @@
      <string name="weather_condition_snow">Snowy</string>
      <string name="weather_condition_wind">Windy</string>
      <string name="weather_condition_mist">Misty</string>
-
-     <!-- Name of the volte/vowifi status bar icon. -->
-     <string name="status_bar_ims">VoLTE/VoWiFi</string>
      
      <!-- Advance location quick setting tile -->
     <string name="quick_settings_secondary_location_off"></string>

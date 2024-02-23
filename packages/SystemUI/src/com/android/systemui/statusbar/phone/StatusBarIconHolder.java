@@ -23,7 +23,6 @@ import android.graphics.drawable.Icon;
 import android.os.UserHandle;
 
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.systemui.statusbar.connectivity.ImsIconState;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.CallIndicatorIconState;
 import com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModel;
 
@@ -62,20 +61,16 @@ public class StatusBarIconHolder {
 
     public static final int TYPE_NETWORK_TRAFFIC = 42;
 
-    public static final int TYPE_IMS = 5;
-
     @IntDef({
             TYPE_ICON,
             TYPE_MOBILE_NEW,
             TYPE_WIFI_NEW,
-            TYPE_NETWORK_TRAFFIC,
-            TYPE_IMS
+            TYPE_NETWORK_TRAFFIC
     })
     @Retention(RetentionPolicy.SOURCE)
     @interface IconType {}
 
     private StatusBarIcon mIcon;
-    private ImsIconState mImsState;
 
     private @IconType int mType = TYPE_ICON;
     private int mTag = 0;
@@ -104,14 +99,6 @@ public class StatusBarIconHolder {
     public static StatusBarIconHolder forNewWifiIcon() {
         StatusBarIconHolder holder = new StatusBarIconHolder();
         holder.mType = TYPE_WIFI_NEW;
-        return holder;
-    }
-
-    /** */
-    public static StatusBarIconHolder fromImsIconState(ImsIconState state) {
-        StatusBarIconHolder holder = new StatusBarIconHolder();
-        holder.mImsState = state;
-        holder.mType = TYPE_IMS;
         return holder;
     }
 
@@ -162,14 +149,6 @@ public class StatusBarIconHolder {
         mIcon = icon;
     }
 
-    public ImsIconState getImsState() {
-        return mImsState;
-    }
-
-    public void setImsState(ImsIconState state) {
-        mImsState = state;
-    }
-
     public boolean isVisible() {
         switch (mType) {
             case TYPE_ICON:
@@ -179,8 +158,6 @@ public class StatusBarIconHolder {
                 // The new pipeline controls visibilities via the view model and view binder, so
                 // this is effectively an unused return value.
                 return true;
-            case TYPE_IMS:
-                return mImsState.visible;
             default:
                 return true;
         }
@@ -200,10 +177,6 @@ public class StatusBarIconHolder {
             case TYPE_WIFI_NEW:
                 // The new pipeline controls visibilities via the view model and view binder, so
                 // ignore setVisible.
-                break;
-
-            case TYPE_IMS:
-                mImsState.visible = visible;
                 break;
         }
     }
