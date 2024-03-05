@@ -1517,9 +1517,24 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
     }
 
     private boolean isMediaControllerAvailable() {
-        boolean showMediaController = Settings.System.getInt(mContext.getContentResolver(), Settings.System.VOLUME_MEDIA_OUTPUT_TOGGLE, 0) != 0;
-        final MediaController mediaController = getActiveLocalMediaController();
-        return mediaController != null && !TextUtils.isEmpty(mediaController.getPackageName())  && showMediaController;
+    	// Cache the value of the showMediaController setting
+    	int showMediaControllerSetting = Settings.System.getInt(
+    	        mContext.getContentResolver(),
+    	        Settings.System.VOLUME_MEDIA_OUTPUT_TOGGLE,
+    	        0);
+
+    	// Check if the cached setting is non-zero (indicating toggle is enabled)
+    	if (showMediaControllerSetting != 0) {
+    	    // Retrieve the active local media controller
+    	    final MediaController mediaController = getActiveLocalMediaController();
+	
+	        // Check if a media controller is available and has a package name
+	        return mediaController != null
+	                && !TextUtils.isEmpty(mediaController.getPackageName());
+	    } else {
+	        // Return false if toggle setting is disabled
+	        return false;
+         }
     }
 
 
