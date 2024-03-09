@@ -6289,6 +6289,12 @@ public final class Settings {
          * @hide
          */
         public static final String NETWORK_TRAFFIC_UNIT_TYPE = "network_traffic_unit_type";
+        
+        /**
+         * Up/Down indicator preference for network traffic
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_DRAWABLE = "network_traffic_drawable";
 
         /**
          * media artwork wallpaper blur level on lockscreen
